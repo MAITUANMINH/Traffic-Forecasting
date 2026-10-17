@@ -1,0 +1,20 @@
+﻿GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+Thí nghiệm 1: thời gian và bộ nhớ theo số nút N
+N=  1000 | dense:     1.31 ms,     33.7 MB | tuyến tính:     5.42 ms,     21.4 MB
+N=  2000 | dense:     1.59 ms,     83.7 MB | tuyến tính:     5.17 ms,     26.6 MB
+N=  5000 | dense:    10.81 ms,    408.8 MB | tuyến tính:     4.36 ms,     42.2 MB
+N= 10000 | dense:    38.12 ms,   1562.2 MB | tuyến tính:     4.61 ms,     69.0 MB
+N= 20000 | dense:   153.27 ms,   6154.9 MB | tuyến tính:     4.52 ms,    121.9 MB
+N= 50000 | dense:      OOM ms,      OOM MB | tuyến tính:     5.93 ms,    273.8 MB
+N=100000 | dense:      OOM ms,      OOM MB | tuyến tính:    15.89 ms,    531.3 MB
+
+Thí nghiệm 2: sai số xấp xỉ theo r (N = 1000, trung bình 5 lần)
+r=   8: sai số tương đối 0.9981 ± 0.0002
+r=  16: sai số tương đối 0.9980 ± 0.0002
+r=  32: sai số tương đối 0.9980 ± 0.0002
+r=  64: sai số tương đối 0.9980 ± 0.0002
+r= 128: sai số tương đối 0.9980 ± 0.0002
+r= 256: sai số tương đối 0.9980 ± 0.0002
+
+Đã lưu hình: results/scaling.png, results/approx_error.png
+Đã lưu: results/scaling.csv, results/approx_error.csv

@@ -1,0 +1,20 @@
+﻿s=0.125 (độ lệch chuẩn điểm attention 0.06) | r=   8: sai số 0.0944 ± 0.0056
+s=0.125 (độ lệch chuẩn điểm attention 0.06) | r=  16: sai số 0.0675 ± 0.0007
+s=0.125 (độ lệch chuẩn điểm attention 0.06) | r=  32: sai số 0.0446 ± 0.0012
+s=0.125 (độ lệch chuẩn điểm attention 0.06) | r=  64: sai số 0.0324 ± 0.0015
+s=0.125 (độ lệch chuẩn điểm attention 0.06) | r= 128: sai số 0.0240 ± 0.0012
+s=0.125 (độ lệch chuẩn điểm attention 0.06) | r= 256: sai số 0.0174 ± 0.0003
+s=0.25  (độ lệch chuẩn điểm attention 0.25) | r=   8: sai số 0.2485 ± 0.0165
+s=0.25  (độ lệch chuẩn điểm attention 0.25) | r=  16: sai số 0.1950 ± 0.0031
+s=0.25  (độ lệch chuẩn điểm attention 0.25) | r=  32: sai số 0.1418 ± 0.0057
+s=0.25  (độ lệch chuẩn điểm attention 0.25) | r=  64: sai số 0.1153 ± 0.0040
+s=0.25  (độ lệch chuẩn điểm attention 0.25) | r= 128: sai số 0.0906 ± 0.0033
+s=0.25  (độ lệch chuẩn điểm attention 0.25) | r= 256: sai số 0.0711 ± 0.0012
+s=0.5   (độ lệch chuẩn điểm attention 1.00) | r=   8: sai số 0.6208 ± 0.0320
+s=0.5   (độ lệch chuẩn điểm attention 1.00) | r=  16: sai số 0.5728 ± 0.0103
+s=0.5   (độ lệch chuẩn điểm attention 1.00) | r=  32: sai số 0.5135 ± 0.0115
+s=0.5   (độ lệch chuẩn điểm attention 1.00) | r=  64: sai số 0.4900 ± 0.0146
+s=0.5   (độ lệch chuẩn điểm attention 1.00) | r= 128: sai số 0.4406 ± 0.0099
+s=0.5   (độ lệch chuẩn điểm attention 1.00) | r= 256: sai số 0.3972 ± 0.0106
+Đã lưu hình: results/approx_error.png
+Đã lưu: results/approx_error.csv
