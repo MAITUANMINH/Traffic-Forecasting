@@ -1,0 +1,11 @@
+Chỉ số,California (đầy đủ),California (tập con 1.000 nút)
+Số nút,9638,1000
+Số bước thời gian,26208,26208
+Train / Val / Test (bước),18346 / 2620 / 5242,18346 / 2620 / 5242
+Số bản ghi tốc độ,252592704,26208000
+Khoảng thời gian (ngày),91.0,91.0
+Tỉ lệ giá trị 0 (thiếu),0.0000%,0.0000%
+Tốc độ TB ± độ lệch chuẩn,63.46 ± 8.07,63.13 ± 9.15
+Tốc độ nhỏ nhất / lớn nhất,3.0 / 100.0,3.0 / 99.0
+Số cạnh trong ma trận kề,29146,6656
+Bậc trung bình,3.02,6.66
