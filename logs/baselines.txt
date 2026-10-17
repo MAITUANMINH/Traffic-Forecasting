@@ -1,0 +1,20 @@
+﻿
+== HA ==
+Horizon  3: MAE 2.9484, MAPE 0.0660, RMSE 5.1862
+Horizon  6: MAE 2.9474, MAPE 0.0660, RMSE 5.1834
+Horizon 12: MAE 2.9461, MAPE 0.0660, RMSE 5.1857
+Trung bình: MAE 2.9475, MAPE 0.0660, RMSE 5.1850
+
+== HA_7ngay ==
+Horizon  3: MAE 2.6659, MAPE 0.0603, RMSE 4.8864
+Horizon  6: MAE 2.6651, MAPE 0.0603, RMSE 4.8836
+Horizon 12: MAE 2.6639, MAPE 0.0603, RMSE 4.8850
+Trung bình: MAE 2.6651, MAPE 0.0603, RMSE 4.8847
+
+== Persistence ==
+Horizon  3: MAE 1.5240, MAPE 0.0291, RMSE 3.0525
+Horizon  6: MAE 2.0203, MAPE 0.0404, RMSE 4.1264
+Horizon 12: MAE 2.7039, MAPE 0.0564, RMSE 5.4045
+Trung bình: MAE 2.0001, MAPE 0.0402, RMSE 4.0292
+
+Đã lưu kết quả vào thư mục results/
