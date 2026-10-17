@@ -14,6 +14,9 @@ Ví dụ:
   python run_fast.py --use_long --name B_long --epochs 50
   # Không dùng đặc trưng dài hạn, cùng tập mẫu (cấu hình A)
   python run_fast.py --name A_noLong --epochs 50
+  # Ablation: chỉ LSFE (woPFS) / chỉ đặc trưng chu kỳ (woCLT)
+  python run_fast.py --use_long --feat_mode long_only --name B_woPFS --epochs 50
+  python run_fast.py --use_long --feat_mode period_only --name B_woCLT --epochs 50
 """
 import argparse
 import copy
@@ -50,6 +53,9 @@ parser.add_argument('--use_residual', action='store_true', default=True)
 parser.add_argument('--use_bn', action='store_true', default=True)
 parser.add_argument('--use_spatial', action='store_true', help='thêm hàm mất mát không gian (Eq. 20)')
 parser.add_argument('--use_long', action='store_true', help='dùng đặc trưng dài hạn đã tính sẵn')
+parser.add_argument('--feat_mode', type=str, default='all', choices=['all', 'long_only', 'period_only'],
+                    help='ablation: all = h_long + h_pe; long_only = bỏ đặc trưng chu kỳ (woPFS); '
+                         'period_only = bỏ đặc trưng LSFE (woCLT). Phần bị bỏ được đặt bằng 0.')
 parser.add_argument('--batch_size', type=int, default=16)
 parser.add_argument('--grad_clip', type=float, default=5)
 parser.add_argument('--learning_rate', type=float, default=0.001)
@@ -95,7 +101,11 @@ def batches(split, shuffle):
         y = torch.from_numpy(data[split][b[:, None] + y_off]).to(args.device).transpose(1, 2)
         f = None
         if feats is not None:
-            f = torch.from_numpy(np.asarray(feats[split][b], dtype=np.float32)).to(args.device)  # (B, N, 44)
+            f = torch.from_numpy(np.array(feats[split][b], dtype=np.float32)).to(args.device)  # (B, N, 44)
+            if args.feat_mode == 'long_only':        # woPFS: bỏ 12 chiều đặc trưng chu kỳ
+                f[..., -args.output_length:] = 0
+            elif args.feat_mode == 'period_only':    # woCLT: bỏ 32 chiều đặc trưng LSFE
+                f[..., :-args.output_length] = 0
         yield x, y[:, :, :, 0], f
 
 
@@ -110,6 +120,8 @@ print(f'Số tham số: {n_params}')
 # ---------- huấn luyện ----------
 best_val, best_state, best_epoch, wait = np.inf, None, 0, 0
 epoch_times = []
+if args.device.type == 'cuda':
+    torch.cuda.reset_peak_memory_stats(args.device)
 for ep in range(1, args.epochs + 1):
     t1 = time.time()
     tr = [trainer.train(x, y, f) for x, y, f in batches('train', True)]
@@ -161,4 +173,7 @@ with open(f'results/{args.name}.csv', 'w', newline='', encoding='utf-8') as fcsv
     w.writerow(['best_epoch', best_epoch])
     w.writerow(['train_sec_per_epoch', f'{np.mean(epoch_times):.1f}'])
     w.writerow(['num_params', n_params])
+    if args.device.type == 'cuda':
+        w.writerow(['peak_gpu_MB', f'{torch.cuda.max_memory_allocated(args.device) / 2 ** 20:.1f}'])
+    w.writerow(['test_sec', f'{test_time:.1f}'])
 print(f'Đã lưu kết quả: results/{args.name}.csv')
