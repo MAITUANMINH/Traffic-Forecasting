@@ -1,8 +1,7 @@
 import math
+import numpy as np
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-from torch.autograd import Variable
 
 class BigST(nn.Module):
     def __init__(self, args, supports=None, edge_indices=None):
@@ -145,7 +144,7 @@ def create_random_matrix(m, d, seed=0, scaling=0, struct_mode=False):
             q = create_products_of_givens_rotations(d, current_seed)
         else:
             unstructured_block = torch.randn((d, d))
-            q, _ = torch.qr(unstructured_block)
+            q, _ = torch.linalg.qr(unstructured_block)
             q = torch.t(q)
         block_list.append(q)
         current_seed += 1
@@ -156,7 +155,7 @@ def create_random_matrix(m, d, seed=0, scaling=0, struct_mode=False):
             q = create_products_of_givens_rotations(d, current_seed)
         else:
             unstructured_block = torch.randn((d, d))
-            q, _ = torch.qr(unstructured_block)
+            q, _ = torch.linalg.qr(unstructured_block)
             q = torch.t(q)
         block_list.append(q[0:remaining_rows])
     final_matrix = torch.vstack(block_list)
