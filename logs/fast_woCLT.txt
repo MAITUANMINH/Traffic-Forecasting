@@ -1,0 +1,73 @@
+﻿Namespace(device='cuda:0', data_path='data/pems_sub1000/short_term', adjdata='data/pems_sub1000/adj_pems.npy', feat_path='data/pems_sub1000/features', name='B_woCLT', min_t=2015, input_length=12, output_length=12, hid_dim=32, in_dim=3, num_nodes=1000, num_layers=3, tau=0.25, random_feature_dim=64, node_dim=32, time_dim=32, time_num=288, week_num=7, use_residual=True, use_bn=True, use_spatial=False, use_long=True, feat_mode='period_only', batch_size=16, grad_clip=5, learning_rate=0.001, milestones=[80, 100], patience=30, dropout=0.3, weight_decay=0.0001, epochs=50, seed=42)
+********** train (18346, 1000, 3) **********
+********** val (2620, 1000, 3) **********
+********** test (5242, 1000, 3) **********
+adj_mx:  (1000, 1000)
+Số tham số: 152284
+Epoch 001 | train 96.8s | Train MAE 1.9798 | Valid MAE 1.4354, MAPE 0.0283, RMSE 3.0212
+Epoch 002 | train 82.9s | Train MAE 1.7277 | Valid MAE 1.3560, MAPE 0.0261, RMSE 2.9154
+Epoch 003 | train 72.5s | Train MAE 1.6584 | Valid MAE 1.3158, MAPE 0.0257, RMSE 2.8870
+Epoch 004 | train 72.4s | Train MAE 1.6248 | Valid MAE 1.2984, MAPE 0.0255, RMSE 2.8645
+Epoch 005 | train 71.6s | Train MAE 1.6009 | Valid MAE 1.3014, MAPE 0.0253, RMSE 2.8544
+Epoch 006 | train 73.0s | Train MAE 1.5849 | Valid MAE 1.2781, MAPE 0.0253, RMSE 2.8598
+Epoch 007 | train 71.3s | Train MAE 1.5729 | Valid MAE 1.2783, MAPE 0.0250, RMSE 2.8486
+Epoch 008 | train 71.6s | Train MAE 1.5646 | Valid MAE 1.2684, MAPE 0.0252, RMSE 2.8563
+Epoch 009 | train 71.4s | Train MAE 1.5583 | Valid MAE 1.2633, MAPE 0.0248, RMSE 2.8539
+Epoch 010 | train 71.2s | Train MAE 1.5521 | Valid MAE 1.2635, MAPE 0.0251, RMSE 2.8511
+Epoch 011 | train 71.2s | Train MAE 1.5481 | Valid MAE 1.2631, MAPE 0.0248, RMSE 2.8436
+Epoch 012 | train 71.6s | Train MAE 1.5429 | Valid MAE 1.2632, MAPE 0.0247, RMSE 2.8396
+Epoch 013 | train 71.7s | Train MAE 1.5390 | Valid MAE 1.2516, MAPE 0.0248, RMSE 2.8429
+Epoch 014 | train 72.1s | Train MAE 1.5350 | Valid MAE 1.2486, MAPE 0.0245, RMSE 2.8409
+Epoch 015 | train 72.2s | Train MAE 1.5324 | Valid MAE 1.2523, MAPE 0.0248, RMSE 2.8522
+Epoch 016 | train 70.9s | Train MAE 1.5303 | Valid MAE 1.2526, MAPE 0.0248, RMSE 2.8581
+Epoch 017 | train 76.6s | Train MAE 1.5267 | Valid MAE 1.2396, MAPE 0.0243, RMSE 2.8285
+Epoch 018 | train 74.6s | Train MAE 1.5250 | Valid MAE 1.2443, MAPE 0.0244, RMSE 2.8320
+Epoch 019 | train 74.6s | Train MAE 1.5235 | Valid MAE 1.2535, MAPE 0.0249, RMSE 2.8463
+Epoch 020 | train 73.8s | Train MAE 1.5207 | Valid MAE 1.2422, MAPE 0.0245, RMSE 2.8448
+Epoch 021 | train 72.3s | Train MAE 1.5200 | Valid MAE 1.2475, MAPE 0.0246, RMSE 2.8575
+Epoch 022 | train 73.4s | Train MAE 1.5176 | Valid MAE 1.2463, MAPE 0.0247, RMSE 2.8456
+Epoch 023 | train 74.0s | Train MAE 1.5181 | Valid MAE 1.2382, MAPE 0.0244, RMSE 2.8266
+Epoch 024 | train 73.9s | Train MAE 1.5147 | Valid MAE 1.2406, MAPE 0.0244, RMSE 2.8292
+Epoch 025 | train 73.8s | Train MAE 1.5124 | Valid MAE 1.2360, MAPE 0.0243, RMSE 2.8238
+Epoch 026 | train 73.2s | Train MAE 1.5124 | Valid MAE 1.2374, MAPE 0.0244, RMSE 2.8326
+Epoch 027 | train 74.5s | Train MAE 1.5117 | Valid MAE 1.2373, MAPE 0.0243, RMSE 2.8129
+Epoch 028 | train 74.1s | Train MAE 1.5107 | Valid MAE 1.2433, MAPE 0.0244, RMSE 2.8242
+Epoch 029 | train 74.5s | Train MAE 1.5094 | Valid MAE 1.2363, MAPE 0.0243, RMSE 2.8197
+Epoch 030 | train 74.1s | Train MAE 1.5072 | Valid MAE 1.2366, MAPE 0.0244, RMSE 2.8243
+Epoch 031 | train 74.4s | Train MAE 1.5074 | Valid MAE 1.2325, MAPE 0.0242, RMSE 2.8106
+Epoch 032 | train 73.7s | Train MAE 1.5059 | Valid MAE 1.2399, MAPE 0.0244, RMSE 2.8289
+Epoch 033 | train 74.6s | Train MAE 1.5061 | Valid MAE 1.2360, MAPE 0.0244, RMSE 2.8237
+Epoch 034 | train 77.1s | Train MAE 1.5044 | Valid MAE 1.2411, MAPE 0.0245, RMSE 2.8296
+Epoch 035 | train 74.1s | Train MAE 1.5039 | Valid MAE 1.2344, MAPE 0.0243, RMSE 2.8178
+Epoch 036 | train 74.0s | Train MAE 1.5033 | Valid MAE 1.2310, MAPE 0.0242, RMSE 2.8206
+Epoch 037 | train 73.9s | Train MAE 1.5030 | Valid MAE 1.2410, MAPE 0.0245, RMSE 2.8393
+Epoch 038 | train 74.6s | Train MAE 1.5018 | Valid MAE 1.2378, MAPE 0.0245, RMSE 2.8330
+Epoch 039 | train 76.7s | Train MAE 1.5023 | Valid MAE 1.2383, MAPE 0.0244, RMSE 2.8261
+Epoch 040 | train 74.2s | Train MAE 1.5001 | Valid MAE 1.2361, MAPE 0.0243, RMSE 2.8236
+Epoch 041 | train 74.4s | Train MAE 1.4995 | Valid MAE 1.2278, MAPE 0.0242, RMSE 2.8213
+Epoch 042 | train 73.0s | Train MAE 1.5006 | Valid MAE 1.2547, MAPE 0.0252, RMSE 2.8648
+Epoch 043 | train 73.9s | Train MAE 1.4992 | Valid MAE 1.2328, MAPE 0.0241, RMSE 2.8115
+Epoch 044 | train 73.4s | Train MAE 1.4987 | Valid MAE 1.2327, MAPE 0.0242, RMSE 2.8215
+Epoch 045 | train 73.4s | Train MAE 1.4977 | Valid MAE 1.2319, MAPE 0.0243, RMSE 2.8258
+Epoch 046 | train 74.2s | Train MAE 1.4973 | Valid MAE 1.2294, MAPE 0.0242, RMSE 2.8205
+Epoch 047 | train 73.2s | Train MAE 1.4977 | Valid MAE 1.2320, MAPE 0.0243, RMSE 2.8286
+Epoch 048 | train 73.6s | Train MAE 1.4978 | Valid MAE 1.2411, MAPE 0.0248, RMSE 2.8443
+Epoch 049 | train 74.6s | Train MAE 1.4965 | Valid MAE 1.2367, MAPE 0.0246, RMSE 2.8352
+Epoch 050 | train 73.7s | Train MAE 1.4958 | Valid MAE 1.2363, MAPE 0.0245, RMSE 2.8273
+
+Epoch tốt nhất: 41, Valid MAE 1.2278
+Horizon  1: Test MAE 0.8756, MAPE 0.0162, RMSE 1.6649
+Horizon  2: Test MAE 1.1226, MAPE 0.0218, RMSE 2.2384
+Horizon  3: Test MAE 1.2836, MAPE 0.0258, RMSE 2.6294
+Horizon  4: Test MAE 1.4062, MAPE 0.0291, RMSE 2.9228
+Horizon  5: Test MAE 1.4969, MAPE 0.0317, RMSE 3.1492
+Horizon  6: Test MAE 1.5682, MAPE 0.0337, RMSE 3.3267
+Horizon  7: Test MAE 1.6241, MAPE 0.0353, RMSE 3.4611
+Horizon  8: Test MAE 1.6718, MAPE 0.0366, RMSE 3.5683
+Horizon  9: Test MAE 1.7141, MAPE 0.0376, RMSE 3.6532
+Horizon 10: Test MAE 1.7530, MAPE 0.0385, RMSE 3.7235
+Horizon 11: Test MAE 1.7882, MAPE 0.0393, RMSE 3.7886
+Horizon 12: Test MAE 1.8254, MAPE 0.0402, RMSE 3.8481
+Trung bình 12 horizon: Test MAE 1.5108, MAPE 0.0321, RMSE 3.1645
+Thời gian huấn luyện trung bình: 74.1 giây/epoch; thời gian test: 20.5 giây
+Đã lưu kết quả: results/B_woCLT.csv
