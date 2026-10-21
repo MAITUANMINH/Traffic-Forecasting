@@ -3,7 +3,7 @@
 ********** val (2620, 1000, 3) **********
 ********** test (5242, 1000, 3) **********
 adj_mx:  (1000, 1000)
-Sß╗æ tham sß╗æ: 152284
+Số tham số: 152284
 Epoch 001 | train 68.4s | Train MAE 1.7787 | Valid MAE 1.4230, MAPE 0.0293, RMSE 3.0976
 Epoch 002 | train 64.2s | Train MAE 1.6589 | Valid MAE 1.3844, MAPE 0.0283, RMSE 3.0364
 Epoch 003 | train 65.7s | Train MAE 1.6375 | Valid MAE 1.3673, MAPE 0.0279, RMSE 2.9878
@@ -55,7 +55,7 @@ Epoch 048 | train 65.4s | Train MAE 1.5041 | Valid MAE 1.2752, MAPE 0.0257, RMSE
 Epoch 049 | train 64.5s | Train MAE 1.5033 | Valid MAE 1.2671, MAPE 0.0255, RMSE 2.8506
 Epoch 050 | train 60.4s | Train MAE 1.5034 | Valid MAE 1.2585, MAPE 0.0252, RMSE 2.8545
 
-Epoch tß╗æt nhß║Ñt: 47, Valid MAE 1.2536
+Epoch tốt nhất: 47, Valid MAE 1.2536
 Horizon  1: Test MAE 0.8731, MAPE 0.0161, RMSE 1.6579
 Horizon  2: Test MAE 1.1189, MAPE 0.0217, RMSE 2.2332
 Horizon  3: Test MAE 1.2760, MAPE 0.0256, RMSE 2.6227
@@ -68,6 +68,6 @@ Horizon  9: Test MAE 1.6745, MAPE 0.0367, RMSE 3.5826
 Horizon 10: Test MAE 1.7066, MAPE 0.0376, RMSE 3.6429
 Horizon 11: Test MAE 1.7379, MAPE 0.0384, RMSE 3.6997
 Horizon 12: Test MAE 1.7721, MAPE 0.0392, RMSE 3.7523
-Trung b├¼nh 12 horizon: Test MAE 1.4837, MAPE 0.0316, RMSE 3.1193
-Thß╗¥i gian huß║Ñn luyß╗çn trung b├¼nh: 65.1 gi├óy/epoch; thß╗¥i gian test: 13.4 gi├óy
-─É├ú l╞░u kß║┐t quß║ú: results/B_BigST.csv
+Trung bình 12 horizon: Test MAE 1.4837, MAPE 0.0316, RMSE 3.1193
+Thời gian huấn luyện trung bình: 65.1 giây/epoch; thời gian test: 13.4 giây
+Đã lưu kết quả: results/B_BigST.csv
