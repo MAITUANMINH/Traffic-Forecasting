@@ -1,11 +1,4 @@
-"""
-Gom các file results/<tên>.csv thành bảng so sánh theo horizon 3, 6, 12 và trung bình.
-Xuất: results/tong_hop.csv (để xem) và results/bang_ket_qua.tex (bảng LaTeX dùng booktabs,
-chép vào báo cáo; nhớ \\usepackage{booktabs, multirow}). Giá trị tốt nhất mỗi cột được in đậm.
 
-Ví dụ:
-    python summarize_results.py
-"""
 import csv
 import os
 
@@ -14,7 +7,11 @@ MODELS = [
     ('HA', 'HA'),
     ('HA_7ngay', 'HA 7 ngày'),
     ('Persistence', 'Persistence'),
+    ('VAR', 'VAR'),
+    ('LSTM', 'LSTM'),
+    ('DCRNN', 'DCRNN'),
     ('GWNET', 'GWNET'),
+    ('AGCRN', 'AGCRN'),
     ('A_khongDaiHan', 'BigST bỏ LSFE và PFS'),
     ('B_woCLT', 'BigST bỏ LSFE (woCLT)'),
     ('B_woPFS', 'BigST bỏ PFS (woPFS)'),
@@ -79,3 +76,20 @@ for label, r in rows:
     print(f'{label:26s}' + ''.join(f'{r[h][0]:8.3f}{r[h][1] * 100:7.2f}%{r[h][2]:8.3f}' for h, _ in HORIZONS))
 print('\n(mỗi nhóm: MAE, MAPE, RMSE)')
 print('Đã lưu: results/tong_hop.csv, results/bang_ket_qua.tex')
+
+# ---------- Đối chiếu với Bảng 2 của bài báo (California 9.638 nút, MAE trung bình 12 bước) ----------
+PAPER = {'HA': 2.12, 'VAR': 1.97, 'DCRNN': 1.68, 'GWNET': 1.52, 'AGCRN': 1.58, 'BigST (đầy đủ)': 1.43}
+mine = {label: r['avg'][0] for label, r in rows}
+common = [m for m in PAPER if m in mine]
+if common:
+    rank_p = {m: i + 1 for i, m in enumerate(sorted(common, key=lambda m: PAPER[m]))}
+    rank_m = {m: i + 1 for i, m in enumerate(sorted(common, key=lambda m: mine[m]))}
+    with open('results/doi_chieu_bai_bao.csv', 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f)
+        w.writerow(['Mô hình', 'MAE bài báo (9.638 nút)', 'Hạng bài báo', 'MAE tái hiện (1.000 nút)', 'Hạng tái hiện'])
+        for m in sorted(common, key=lambda m: PAPER[m]):
+            w.writerow([m, f'{PAPER[m]:.2f}', rank_p[m], f'{mine[m]:.3f}', rank_m[m]])
+    print('\nĐối chiếu thứ hạng với bài báo (MAE trung bình):')
+    for m in sorted(common, key=lambda m: PAPER[m]):
+        print(f'  {m:16s} bài báo {PAPER[m]:.2f} (hạng {rank_p[m]})  |  tái hiện {mine[m]:.3f} (hạng {rank_m[m]})')
+    print('Đã lưu: results/doi_chieu_bai_bao.csv')
