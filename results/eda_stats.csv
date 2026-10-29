@@ -1,0 +1,26 @@
+Chỉ số,Giá trị
+Số bước train,18346
+Số cảm biến,1000
+Tốc độ trung bình (dặm/giờ),63.09
+Độ lệch chuẩn,9.23
+Trung vị,65.2
+Phân vị 5% / 95%,44.1 / 70.8
+Tỉ lệ bản ghi dưới 40 dặm/giờ (ùn tắc),4.14%
+Tỉ lệ giá trị 0 (thiếu),0.00%
+"Tốc độ TB 6h-9h, mã ngày 0",60.95
+"Tốc độ TB 6h-9h, mã ngày 1",66.13
+"Tốc độ TB 6h-9h, mã ngày 2",67.28
+"Tốc độ TB 6h-9h, mã ngày 3",60.40
+"Tốc độ TB 6h-9h, mã ngày 4",58.74
+"Tốc độ TB 6h-9h, mã ngày 5",58.91
+"Tốc độ TB 6h-9h, mã ngày 6",59.12
+Giờ có tốc độ TB thấp nhất,17.4h (56.8 dặm/giờ)
+Giờ có tốc độ TB cao nhất,5.2h (67.7 dặm/giờ)
+Tự tương quan TB ở độ trễ 5 phút,0.915
+Tự tương quan TB ở độ trễ 1 giờ,0.634
+Tự tương quan TB ở độ trễ 12 giờ,-0.246
+Tự tương quan TB ở độ trễ 1 ngày,0.530
+Tự tương quan TB ở độ trễ 7 ngày,0.560
+Số cặp kề nhau,6656
+"Tương quan TB, cặp kề nhau",0.438
+"Tương quan TB, cặp ngẫu nhiên",0.322
