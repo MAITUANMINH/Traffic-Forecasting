@@ -1,4 +1,4 @@
-﻿GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+GPU: NVIDIA GeForce RTX 4060 Laptop GPU
 Thí nghiệm 1: thời gian và bộ nhớ theo số nút N
 N=  1000 | dense:     1.31 ms,     33.7 MB | tuyến tính:     5.42 ms,     21.4 MB
 N=  2000 | dense:     1.59 ms,     83.7 MB | tuyến tính:     5.17 ms,     26.6 MB

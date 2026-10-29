@@ -1,4 +1,4 @@
-﻿********** train (18346, 1000, 3) **********
+********** train (18346, 1000, 3) **********
 ********** val (2620, 1000, 3) **********
 ********** test (5242, 1000, 3) **********
 Namespace(device='cuda:0', data='data/pems_sub1000/short_term', input_length=2016, output_length=12, nhid=32, in_dim=3, num_nodes=1000, batch_size=1, tiny_batch_size=256, learning_rate=0.001, dropout=0.3, weight_decay=0.0001, epochs=1, print_every=500, save='checkpoint/', expid=1)

@@ -1,4 +1,4 @@
-﻿
+
 == HA ==
 Horizon  3: MAE 2.9484, MAPE 0.0660, RMSE 5.1862
 Horizon  6: MAE 2.9474, MAPE 0.0660, RMSE 5.1834
