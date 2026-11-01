@@ -9,5 +9,4 @@ checkpoint/
 *.h5
 *.pt
 *.pth
-Claude outputs/
 *_thu.csv
