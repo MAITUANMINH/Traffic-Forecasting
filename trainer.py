@@ -12,7 +12,7 @@ class Trainer():
         self.model = BigST(args, supports, edge_indices)
         self.model.to(args.device)
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay, eps=1e-8)
-        self.scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=args.milestones, gamma=0.1, verbose=False)
+        self.scheduler = torch.optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=args.milestones, gamma=0.1,)
         
         self.loss = metrics.masked_mae
         self.scaler = scaler

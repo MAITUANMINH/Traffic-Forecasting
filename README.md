@@ -52,7 +52,7 @@ Dữ liệu và checkpoint không đưa lên GitHub (xem `.gitignore`).
 
 Log của từng lần chạy nằm trong `logs/`.
 
-## Các file code được thêm vào 
+## Các file tự viết thêm
 
 | File | Mô tả |
 |---|---|

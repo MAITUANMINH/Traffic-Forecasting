@@ -3,8 +3,11 @@ venv/
 .idea/
 __pycache__/
 data/
+checkpoint/
 *.npy
 *.npz
 *.h5
 *.pt
 *.pth
+Claude outputs/
+*_thu.csv

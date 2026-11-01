@@ -1,19 +1,29 @@
-# Sửa log bị lỗi tiếng Việt do PowerShell ghi bằng bảng mã cp437
+# Sửa log bị lỗi tiếng Việt (bảng mã cp437) và đổi mọi log về UTF-8
 import glob
 
-for path in glob.glob('logs/*.txt'):
-    with open(path, encoding='utf-8', errors='replace') as f:
-        lines = f.read().splitlines()
+def read_text(path):
+    raw = open(path, 'rb').read()
+    if raw.startswith(b'\xff\xfe') or raw.startswith(b'\xfe\xff'):
+        return raw.decode('utf-16'), 'UTF-16'
+    if raw.startswith(b'\xef\xbb\xbf'):
+        return raw.decode('utf-8-sig'), 'UTF-8 BOM'
+    try:
+        return raw.decode('utf-8'), 'UTF-8'
+    except UnicodeDecodeError:
+        return raw.decode('cp1252', errors='replace'), 'khác'
+
+for path in sorted(glob.glob('logs/*.txt')):
+    text, enc = read_text(path)
     fixed, changed = [], 0
-    for line in lines:
+    for line in text.splitlines():
         try:
             new = line.encode('cp437').decode('utf-8')
             if new != line:
                 changed += 1
-            fixed.append(new)
+            line = new
         except (UnicodeEncodeError, UnicodeDecodeError):
-            fixed.append(line)          # dòng đã đúng hoặc không sửa được thì giữ nguyên
-    if changed:
-        with open(path, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(fixed) + '\n')
-    print(f'{path}: sửa {changed} dòng')
+            pass                      # dòng đã đúng thì giữ nguyên
+        fixed.append(line)
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(fixed) + '\n')
+    print(f'{path}: đọc dạng {enc}, sửa {changed} dòng')
