@@ -12,6 +12,7 @@ import torch.nn.functional as F
 
 import util
 from model import BigST
+from model_cai_tien import BigSTCaiTien
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--sensor', type=int, default=6072, help='mã cảm biến trong bộ California đầy đủ')
@@ -26,6 +27,8 @@ parser.add_argument('--adjdata', type=str, default='data/pems_sub1000/adj_pems.n
 parser.add_argument('--feat_path', type=str, default='data/pems_sub1000/features')
 parser.add_argument('--bigst_ckpt', type=str, default='checkpoint/bigst_B_BigST.pth')
 parser.add_argument('--gwnet_ckpt', type=str, default='checkpoint/GWNET.pth')
+parser.add_argument('--cai_tien_ckpt', type=str, default='checkpoint/bigst_C_AB.pth',
+                    help='checkpoint BigST cải tiến (A+B); bỏ qua nếu không có file')
 parser.add_argument('--min_t', type=int, default=2015)
 args = parser.parse_args()
 
@@ -165,6 +168,13 @@ bigst = BigST(cfg, supports, torch.nonzero(supports[0] > 0)).to(dev)
 bigst.load_state_dict(torch.load(args.bigst_ckpt, map_location=dev))
 bigst.eval()
 
+cai_tien = None
+if os.path.exists(args.cai_tien_ckpt):
+    cfg_ct = SimpleNamespace(**vars(cfg), local_graph=True, predict_delta=True, local_sparse=False)
+    cai_tien = BigSTCaiTien(cfg_ct, supports, torch.nonzero(supports[0] > 0)).to(dev)
+    cai_tien.load_state_dict(torch.load(args.cai_tien_ckpt, map_location=dev))
+    cai_tien.eval()
+
 gwnet = None
 if not args.no_gwnet:
     adj = np.load(args.adjdata).astype(np.float32)
@@ -194,6 +204,9 @@ def timed(fn, reps=20):
 
 yb, ms_b = timed(lambda: bigst(x.transpose(1, 2), f)[0])                        # (1, N, 12)
 pred_b = (yb[0] * std + mean).cpu().numpy()                                      # (N, 12)
+if cai_tien is not None:
+    yc, ms_c = timed(lambda: cai_tien(x.transpose(1, 2), f)[0])
+    pred_c = (yc[0] * std + mean).cpu().numpy()
 if gwnet is not None:
     yg, ms_g = timed(lambda: gwnet(x[..., :2].permute(0, 3, 2, 1))[..., 0].transpose(1, 2))
     pred_g = (yg[0] * std + mean).cpu().numpy()
@@ -206,22 +219,27 @@ print(f'Tốc độ 1 giờ vừa qua tại cảm biến {args.sensor} (dặm/gi
 past = raw[now - 11:now + 1, node]
 print('  ' + '  '.join(f'{v:5.1f}' for v in past))
 line('-')
-hdr = f'{"Sau":>7} {"Giờ":>6} {"Thực tế":>9} {"BigST":>8}' + (f' {"GWNET":>8}' if gwnet is not None else '') + f' {"Giữ nguyên":>11}'
+hdr = f'{"Sau":>7} {"Giờ":>6} {"Thực tế":>9} {"BigST":>8}' + (f' {"Cải tiến":>9}' if cai_tien is not None else '') + (f' {"GWNET":>8}' if gwnet is not None else '') + f' {"Giữ nguyên":>11}'
 print(hdr)
 for h in range(H):
     row = f'{(h + 1) * 5:>4} ph {clock(now + 1 + h):>6} {truth[h]:9.1f} {pred_b[node, h]:8.1f}'
+    if cai_tien is not None:
+        row += f' {pred_c[node, h]:9.1f}'
     if gwnet is not None:
         row += f' {pred_g[node, h]:8.1f}'
     print(row + f' {persist[h]:11.1f}')
 line('-')
 mae = lambda p: np.abs(p - truth).mean()
 print(f'MAE 60 phút tại cảm biến này : BigST {mae(pred_b[node]):.2f}'
+      + (f' | Cải tiến {mae(pred_c[node]):.2f}' if cai_tien is not None else '')
       + (f' | GWNET {mae(pred_g[node]):.2f}' if gwnet is not None else '')
       + f' | Giữ nguyên {mae(persist):.2f}')
 all_truth = raw[now + 1:now + 1 + H].T                                           # (N, 12)
 print(f'MAE trên cả {N} cảm biến     : BigST {np.abs(pred_b - all_truth).mean():.2f}'
+      + (f' | Cải tiến {np.abs(pred_c - all_truth).mean():.2f}' if cai_tien is not None else '')
       + (f' | GWNET {np.abs(pred_g - all_truth).mean():.2f}' if gwnet is not None else ''))
 print(f'Thời gian dự báo cả {N} cảm biến: BigST {ms_b:.1f} ms'
+      + (f' | Cải tiến {ms_c:.1f} ms' if cai_tien is not None else '')
       + (f' | GWNET {ms_g:.1f} ms' if gwnet is not None else '') + ' (trung bình 20 lần)')
 
 # ============================== 4. Hình ==============================
@@ -237,6 +255,9 @@ ax.plot(tx_h, hist, color='black', lw=1.8, label='Đã quan sát')
 ax.plot(np.r_[0, tx_f], np.r_[hist[-1], truth], color='black', lw=1.8, ls='--', label='Thực tế (chưa biết)')
 ax.plot(np.r_[0, tx_f], np.r_[hist[-1], pred_b[node]], color='tab:blue', lw=2.2, marker='o', ms=4,
         label=f'BigST (MAE {mae(pred_b[node]):.2f})')
+if cai_tien is not None:
+    ax.plot(np.r_[0, tx_f], np.r_[hist[-1], pred_c[node]], color='tab:green', lw=2.2, marker='^', ms=4,
+            label=f'BigST cải tiến (MAE {mae(pred_c[node]):.2f})')
 if gwnet is not None:
     ax.plot(np.r_[0, tx_f], np.r_[hist[-1], pred_g[node]], color='tab:orange', lw=1.6, marker='s', ms=3,
             label=f'GWNET (MAE {mae(pred_g[node]):.2f})')
