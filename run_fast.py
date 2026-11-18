@@ -1,4 +1,27 @@
+"""
+Huấn luyện Giai đoạn 2 của BigST (LGSCN) dùng đặc trưng dài hạn đã tính sẵn bởi
+precompute_features.py, thay vì tính lại LSFE ở mỗi vòng lặp như run.py.
 
+Mô hình, hàm mất mát và cách đánh giá giữ nguyên như run.py (dùng lại Trainer, BigST).
+Khác biệt:
+  - đặc trưng dài hạn đọc từ file thay vì tính lại;
+  - --min_t: chỉ số đầu tiên của cửa sổ. Mặc định 2015 để cả hai cấu hình (có/không dùng
+    đặc trưng dài hạn) được huấn luyện và kiểm tra trên CÙNG một tập mẫu -> so sánh công bằng;
+  - đo thời gian mỗi epoch đúng cách và lưu kết quả từng horizon ra file CSV.
+
+Ví dụ:
+  # BigST đầy đủ (cấu hình B)
+  python run_fast.py --use_long --name B_long --epochs 50
+  # Không dùng đặc trưng dài hạn, cùng tập mẫu (cấu hình A)
+  python run_fast.py --name A_noLong --epochs 50
+  # Ablation: chỉ LSFE (woPFS) / chỉ đặc trưng chu kỳ (woCLT)
+  python run_fast.py --use_long --feat_mode long_only --name B_woPFS --epochs 50
+  python run_fast.py --use_long --feat_mode period_only --name B_woCLT --epochs 50
+  # Cải tiến cuối kỳ: A (đồ thị cục bộ), B (dự báo phần thay đổi), A+B
+  python run_fast.py --use_long --local_graph --name C_A --epochs 50
+  python run_fast.py --use_long --predict_delta --name C_B --epochs 50
+  python run_fast.py --use_long --local_graph --predict_delta --name C_AB --epochs 50
+"""
 import argparse
 import copy
 import csv
