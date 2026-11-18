@@ -1,23 +1,4 @@
-"""
-Huấn luyện Giai đoạn 2 của BigST (LGSCN) dùng đặc trưng dài hạn đã tính sẵn bởi
-precompute_features.py, thay vì tính lại LSFE ở mỗi vòng lặp như run.py.
 
-Mô hình, hàm mất mát và cách đánh giá giữ nguyên như run.py (dùng lại Trainer, BigST).
-Khác biệt:
-  - đặc trưng dài hạn đọc từ file thay vì tính lại;
-  - --min_t: chỉ số đầu tiên của cửa sổ. Mặc định 2015 để cả hai cấu hình (có/không dùng
-    đặc trưng dài hạn) được huấn luyện và kiểm tra trên CÙNG một tập mẫu -> so sánh công bằng;
-  - đo thời gian mỗi epoch đúng cách và lưu kết quả từng horizon ra file CSV.
-
-Ví dụ:
-  # BigST đầy đủ (cấu hình B)
-  python run_fast.py --use_long --name B_long --epochs 50
-  # Không dùng đặc trưng dài hạn, cùng tập mẫu (cấu hình A)
-  python run_fast.py --name A_noLong --epochs 50
-  # Ablation: chỉ LSFE (woPFS) / chỉ đặc trưng chu kỳ (woCLT)
-  python run_fast.py --use_long --feat_mode long_only --name B_woPFS --epochs 50
-  python run_fast.py --use_long --feat_mode period_only --name B_woCLT --epochs 50
-"""
 import argparse
 import copy
 import csv
@@ -65,6 +46,10 @@ parser.add_argument('--dropout', type=float, default=0.3)
 parser.add_argument('--weight_decay', type=float, default=0.0001)
 parser.add_argument('--epochs', type=int, default=50)
 parser.add_argument('--seed', type=int, default=42)
+# ---- cải tiến cuối kỳ (model_cai_tien.py) ----
+parser.add_argument('--local_graph', action='store_true', help='cải tiến A: thêm nhánh đồ thị cục bộ (ma trận kề đường thật)')
+parser.add_argument('--local_sparse', action='store_true', help='dùng ma trận kề dạng thưa cho nhánh cục bộ (khi N lớn)')
+parser.add_argument('--predict_delta', action='store_true', help='cải tiến B: dự báo phần thay đổi so với tốc độ hiện tại')
 args = parser.parse_args()
 print(args)
 
@@ -113,6 +98,11 @@ def batches(split, shuffle):
 adj_mx = util.load_adj(args.adjdata)
 supports = [torch.tensor(i).to(args.device) for i in adj_mx]
 edge_indices = torch.nonzero(supports[0] > 0)
+if args.local_graph or args.predict_delta:
+    import trainer as trainer_module
+    from model_cai_tien import BigSTCaiTien
+    trainer_module.BigST = BigSTCaiTien   # Trainer sẽ tạo mô hình cải tiến
+    print(f'Dùng mô hình cải tiến: local_graph={args.local_graph}, predict_delta={args.predict_delta}')
 trainer = Trainer(args, scaler, supports, edge_indices)
 n_params = sum(p.numel() for p in trainer.model.parameters())
 print(f'Số tham số: {n_params}')
