@@ -1,0 +1,73 @@
+Namespace(device='cuda:0', data_path='data/pems_sub1000/short_term', adjdata='data/pems_sub1000/adj_pems.npy', feat_path='data/pems_sub1000/features', name='S_tau1.0', min_t=2015, input_length=12, output_length=12, hid_dim=32, in_dim=3, num_nodes=1000, num_layers=3, tau=1.0, random_feature_dim=64, node_dim=32, time_dim=32, time_num=288, week_num=7, use_residual=True, use_bn=True, use_spatial=False, use_long=True, feat_mode='all', batch_size=16, grad_clip=5, learning_rate=0.001, milestones=[80, 100], patience=30, dropout=0.3, weight_decay=0.0001, epochs=50, seed=42, local_graph=False, local_sparse=False, predict_delta=False)
+********** train (18346, 1000, 3) **********
+********** val (2620, 1000, 3) **********
+********** test (5242, 1000, 3) **********
+adj_mx:  (1000, 1000)
+Số tham số: 152284
+Epoch 001 | train 44.1s | Train MAE 1.7787 | Valid MAE 1.4238, MAPE 0.0293, RMSE 3.0990
+Epoch 002 | train 40.9s | Train MAE 1.6615 | Valid MAE 1.3877, MAPE 0.0282, RMSE 3.0417
+Epoch 003 | train 40.9s | Train MAE 1.6427 | Valid MAE 1.3700, MAPE 0.0282, RMSE 3.0188
+Epoch 004 | train 40.3s | Train MAE 1.6195 | Valid MAE 1.3564, MAPE 0.0279, RMSE 2.9903
+Epoch 005 | train 40.8s | Train MAE 1.6021 | Valid MAE 1.3330, MAPE 0.0271, RMSE 2.9539
+Epoch 006 | train 39.8s | Train MAE 1.5896 | Valid MAE 1.3242, MAPE 0.0270, RMSE 2.9407
+Epoch 007 | train 39.7s | Train MAE 1.5806 | Valid MAE 1.3218, MAPE 0.0270, RMSE 2.9467
+Epoch 008 | train 39.9s | Train MAE 1.5732 | Valid MAE 1.3298, MAPE 0.0273, RMSE 2.9499
+Epoch 009 | train 40.0s | Train MAE 1.5679 | Valid MAE 1.3118, MAPE 0.0266, RMSE 2.9146
+Epoch 010 | train 39.8s | Train MAE 1.5647 | Valid MAE 1.3207, MAPE 0.0269, RMSE 2.9370
+Epoch 011 | train 40.1s | Train MAE 1.5611 | Valid MAE 1.3169, MAPE 0.0269, RMSE 2.9376
+Epoch 012 | train 39.9s | Train MAE 1.5584 | Valid MAE 1.3039, MAPE 0.0263, RMSE 2.9122
+Epoch 013 | train 39.7s | Train MAE 1.5560 | Valid MAE 1.3122, MAPE 0.0268, RMSE 2.9249
+Epoch 014 | train 39.7s | Train MAE 1.5543 | Valid MAE 1.3054, MAPE 0.0266, RMSE 2.9194
+Epoch 015 | train 39.6s | Train MAE 1.5522 | Valid MAE 1.3079, MAPE 0.0266, RMSE 2.9166
+Epoch 016 | train 40.4s | Train MAE 1.5513 | Valid MAE 1.3117, MAPE 0.0269, RMSE 2.9354
+Epoch 017 | train 40.9s | Train MAE 1.5493 | Valid MAE 1.3058, MAPE 0.0264, RMSE 2.9146
+Epoch 018 | train 40.6s | Train MAE 1.5486 | Valid MAE 1.3065, MAPE 0.0266, RMSE 2.9182
+Epoch 019 | train 41.2s | Train MAE 1.5475 | Valid MAE 1.3015, MAPE 0.0264, RMSE 2.9083
+Epoch 020 | train 40.8s | Train MAE 1.5466 | Valid MAE 1.2915, MAPE 0.0261, RMSE 2.8936
+Epoch 021 | train 40.0s | Train MAE 1.5455 | Valid MAE 1.2968, MAPE 0.0261, RMSE 2.9055
+Epoch 022 | train 39.8s | Train MAE 1.5454 | Valid MAE 1.2959, MAPE 0.0261, RMSE 2.9104
+Epoch 023 | train 41.1s | Train MAE 1.5441 | Valid MAE 1.3008, MAPE 0.0263, RMSE 2.9047
+Epoch 024 | train 40.2s | Train MAE 1.5436 | Valid MAE 1.2976, MAPE 0.0263, RMSE 2.9004
+Epoch 025 | train 41.2s | Train MAE 1.5422 | Valid MAE 1.2872, MAPE 0.0260, RMSE 2.8930
+Epoch 026 | train 40.0s | Train MAE 1.5424 | Valid MAE 1.2963, MAPE 0.0261, RMSE 2.9038
+Epoch 027 | train 40.1s | Train MAE 1.5408 | Valid MAE 1.2864, MAPE 0.0259, RMSE 2.8836
+Epoch 028 | train 42.8s | Train MAE 1.5395 | Valid MAE 1.2931, MAPE 0.0261, RMSE 2.9001
+Epoch 029 | train 41.8s | Train MAE 1.5385 | Valid MAE 1.2855, MAPE 0.0258, RMSE 2.8807
+Epoch 030 | train 43.0s | Train MAE 1.5380 | Valid MAE 1.2916, MAPE 0.0261, RMSE 2.8981
+Epoch 031 | train 41.3s | Train MAE 1.5368 | Valid MAE 1.2928, MAPE 0.0261, RMSE 2.8867
+Epoch 032 | train 40.9s | Train MAE 1.5365 | Valid MAE 1.2894, MAPE 0.0259, RMSE 2.8827
+Epoch 033 | train 41.0s | Train MAE 1.5360 | Valid MAE 1.2839, MAPE 0.0259, RMSE 2.8734
+Epoch 034 | train 41.0s | Train MAE 1.5348 | Valid MAE 1.2925, MAPE 0.0261, RMSE 2.8904
+Epoch 035 | train 40.7s | Train MAE 1.5346 | Valid MAE 1.2858, MAPE 0.0260, RMSE 2.8818
+Epoch 036 | train 41.2s | Train MAE 1.5339 | Valid MAE 1.2798, MAPE 0.0256, RMSE 2.8669
+Epoch 037 | train 42.2s | Train MAE 1.5332 | Valid MAE 1.2920, MAPE 0.0260, RMSE 2.8829
+Epoch 038 | train 41.3s | Train MAE 1.5332 | Valid MAE 1.2910, MAPE 0.0259, RMSE 2.8801
+Epoch 039 | train 41.2s | Train MAE 1.5331 | Valid MAE 1.2900, MAPE 0.0260, RMSE 2.8926
+Epoch 040 | train 40.9s | Train MAE 1.5331 | Valid MAE 1.2814, MAPE 0.0258, RMSE 2.8625
+Epoch 041 | train 40.7s | Train MAE 1.5319 | Valid MAE 1.2744, MAPE 0.0256, RMSE 2.8627
+Epoch 042 | train 41.2s | Train MAE 1.5320 | Valid MAE 1.2945, MAPE 0.0263, RMSE 2.8987
+Epoch 043 | train 41.1s | Train MAE 1.5314 | Valid MAE 1.2712, MAPE 0.0255, RMSE 2.8574
+Epoch 044 | train 42.0s | Train MAE 1.5311 | Valid MAE 1.2793, MAPE 0.0258, RMSE 2.8668
+Epoch 045 | train 42.0s | Train MAE 1.5304 | Valid MAE 1.2740, MAPE 0.0257, RMSE 2.8637
+Epoch 046 | train 41.4s | Train MAE 1.5300 | Valid MAE 1.2791, MAPE 0.0257, RMSE 2.8697
+Epoch 047 | train 41.1s | Train MAE 1.5304 | Valid MAE 1.2804, MAPE 0.0258, RMSE 2.8792
+Epoch 048 | train 41.5s | Train MAE 1.5295 | Valid MAE 1.2857, MAPE 0.0260, RMSE 2.8853
+Epoch 049 | train 41.1s | Train MAE 1.5292 | Valid MAE 1.2810, MAPE 0.0259, RMSE 2.8780
+Epoch 050 | train 41.2s | Train MAE 1.5288 | Valid MAE 1.2769, MAPE 0.0257, RMSE 2.8710
+
+Epoch tốt nhất: 43, Valid MAE 1.2712
+Horizon  1: Test MAE 0.8707, MAPE 0.0159, RMSE 1.6613
+Horizon  2: Test MAE 1.1182, MAPE 0.0214, RMSE 2.2366
+Horizon  3: Test MAE 1.2793, MAPE 0.0253, RMSE 2.6257
+Horizon  4: Test MAE 1.3942, MAPE 0.0285, RMSE 2.9055
+Horizon  5: Test MAE 1.4808, MAPE 0.0310, RMSE 3.1139
+Horizon  6: Test MAE 1.5490, MAPE 0.0330, RMSE 3.2731
+Horizon  7: Test MAE 1.6008, MAPE 0.0346, RMSE 3.3981
+Horizon  8: Test MAE 1.6428, MAPE 0.0358, RMSE 3.4963
+Horizon  9: Test MAE 1.6792, MAPE 0.0368, RMSE 3.5793
+Horizon 10: Test MAE 1.7126, MAPE 0.0377, RMSE 3.6498
+Horizon 11: Test MAE 1.7473, MAPE 0.0386, RMSE 3.7137
+Horizon 12: Test MAE 1.7871, MAPE 0.0396, RMSE 3.7805
+Trung bình 12 horizon: Test MAE 1.4885, MAPE 0.0315, RMSE 3.1195
+Thời gian huấn luyện trung bình: 40.9 giây/epoch; thời gian test: 11.4 giây
+Đã lưu kết quả: results/S_tau1.0.csv
